@@ -1,0 +1,15 @@
+{
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "env": {
+      "node": true
+    },
+    "rules": {
+      "indent": "off",
+      "@typescript-eslint/indent": ["error", 4],
+      "no-var-requires": true
+    },
+    "parser": "@typescript-eslint/parser"
+  }
