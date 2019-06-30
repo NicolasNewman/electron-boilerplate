@@ -4,12 +4,13 @@
       "plugin:@typescript-eslint/recommended"
     ],
     "env": {
-      "node": true
+      "node": true,
+      "browser": true
     },
     "rules": {
       "indent": "off",
       "@typescript-eslint/indent": ["error", 4],
-      "no-var-requires": true
+      "no-var-requires": 0
     },
     "parser": "@typescript-eslint/parser"
   }
