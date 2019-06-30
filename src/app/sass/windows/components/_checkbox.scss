@@ -1,0 +1,14 @@
+$color-border: #999;
+$color-border-hover: #666;
+$color-border-active: #0078D7;
+
+.checkbox {
+    -webkit-appearance: none;
+    border: 2px solid $color-black;
+    padding: 0.5rem;
+}
+
+.checkbox:checked::after {
+    content: "\2713";
+    font-size: 1.4rem;
+}
