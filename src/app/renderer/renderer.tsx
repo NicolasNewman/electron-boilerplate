@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 // Import the styles here to process them with webpack
-import '../assets/sass/main.scss';
+import '../sass/main.scss';
 
 ReactDOM.render(
     <div>
