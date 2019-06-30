@@ -7,14 +7,14 @@ let mainWindow: BrowserWindow;
 const createWindow = (): void => {
     mainWindow = new BrowserWindow({
         height: 600,
-        width: 800,
-        resizable: false,
-        frame: false
+        width: 800
+        // resizable: false,
+        // frame: false
     });
 
     mainWindow.loadURL(
         url.format({
-            pathname: path.join(__dirname, './app/renderer/index.html'),
+            pathname: path.join(__dirname, 'index.html'),
             protocol: 'file:',
             slashes: true
         })

@@ -46,7 +46,7 @@ let mainConfig = {
 
 let rendererConfig = {
     mode: 'development',
-    entry: './src/renderer/renderer.tsx',
+    entry: './src/app/renderer/renderer.tsx',
     target: 'electron-renderer',
     output: {
         filename: 'renderer.bundle.js',
@@ -95,7 +95,7 @@ let rendererConfig = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, './src/renderer/index.html'),
+            template: path.resolve(__dirname, './src/app/renderer/index.html'),
         }),
     ],
 };
