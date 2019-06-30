@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const GoogleFontsPlugin = require("@beyonk/google-fonts-webpack-plugin")
 const path = require('path');
 
 let mainConfig = {
@@ -96,6 +97,14 @@ let rendererConfig = {
     plugins: [
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, './src/app/renderer/index.html'),
+        }),
+        new GoogleFontsPlugin({
+            fonts: [
+                { family: "Roboto", variants: [ "300", "400", "500", "700" ] }
+            ],
+            formats: [
+                "woff2"
+            ]
         }),
     ],
 };
