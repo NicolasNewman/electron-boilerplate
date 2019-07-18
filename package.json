@@ -5,19 +5,21 @@
   "main": "./dist/main.bundle.js",
   "scripts": {
     "start": "electron ./dist/main.bundle.js",
-    "development": "rimraf dist && webpack --watch --config ./webpack.dev.js --progress --colors",
-    "production": "rimraf dist && webpack --config ./webpack.prod.js --progress --colors"
+    "dev": "rimraf dist && webpack --watch --config ./webpack.dev.js --progress --colors",
+    "prod": "rimraf dist && webpack --config ./webpack.prod.js --progress --colors"
   },
   "author": "NicolasNewman",
   "license": "ISC",
   "devDependencies": {
     "@types/react": "^16.8.22",
     "@types/react-dom": "^16.8.4",
+    "@types/react-redux": "^7.1.1",
     "@typescript-eslint/eslint-plugin": "^1.11.0",
     "@typescript-eslint/parser": "^1.11.0",
     "css-loader": "^3.0.0",
     "electron": "^5.0.6",
     "eslint": "^6.0.1",
+    "eslint-plugin-react": "^7.14.2",
     "file-loader": "^4.0.0",
     "google-fonts-plugin": "^4.1.0",
     "html-webpack-plugin": "^3.2.0",
@@ -31,10 +33,10 @@
     "webpack-cli": "^3.3.5"
   },
   "dependencies": {
-    "@material-ui/core": "^4.1.3",
-    "@material-ui/icons": "^4.2.1",
-    "@material-ui/styles": "^4.1.2",
+    "antd": "^3.20.3",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react-redux": "^7.1.0",
+    "redux": "^4.0.4"
   }
 }

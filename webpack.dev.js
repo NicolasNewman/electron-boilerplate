@@ -1,5 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const GoogleFontsPlugin = require('google-fonts-plugin')
+const GoogleFontsPlugin = require('google-fonts-plugin');
 const path = require('path');
 
 let mainConfig = {
@@ -13,6 +13,7 @@ let mainConfig = {
     node: {
         __dirname: false,
         __filename: false,
+        global: true,
     },
     resolve: {
         extensions: ['.js', '.json', '.ts'],
@@ -56,6 +57,7 @@ let rendererConfig = {
     node: {
         __dirname: false,
         __filename: false,
+        global: true,
     },
     resolve: {
         extensions: ['.js', '.json', '.ts', '.tsx'],
