@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const GoogleFontsPlugin = require('google-fonts-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
 let mainConfig = {
@@ -13,6 +14,7 @@ let mainConfig = {
     node: {
         __dirname: false,
         __filename: false,
+        global: true,
     },
     resolve: {
         extensions: ['.js', '.json', '.ts'],
@@ -56,6 +58,7 @@ let rendererConfig = {
     node: {
         __dirname: false,
         __filename: false,
+        global: true,
     },
     resolve: {
         extensions: ['.js', '.json', '.ts', '.tsx'],
@@ -71,19 +74,41 @@ let rendererConfig = {
                 },
             },
             {
-                test: /\.(scss|css)$/,
-                use: [
-                    'style-loader',
-                    'css-loader?sourceMap',
-                    'sass-loader?sourceMap',
-                ],
-            },
-            {
                 test: /\.(jpg|png|svg|ico|icns)$/,
                 loader: 'file-loader',
                 options: {
                     name: '[path][name].[ext]',
                 },
+            },
+            {
+                test: /\.(less)$/,
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader
+                    },
+                    {
+                        loader: 'css-loader'
+                    },
+                    {
+                        loader: 'less-loader',
+                        options: {
+                            javascriptEnabled: true,
+                            modifyVars: {
+                            },
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader
+                    },
+                    {
+                        loader: 'css-loader'
+                    }
+                ],
             },
             {
                 test: /\.(eot|ttf|woff|woff2)$/,
@@ -119,6 +144,10 @@ let rendererConfig = {
             "formats": [
                 "woff2"
             ]        
+        }),
+        new MiniCssExtractPlugin({
+            filename: 'css/[name].css',
+            chunkFilename: 'css/[name].css'
         }),
     ],
 };

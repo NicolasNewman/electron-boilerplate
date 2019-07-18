@@ -73,19 +73,41 @@ let rendererConfig = {
                 },
             },
             {
-                test: /\.(scss|css)$/,
-                use: [
-                    'style-loader',
-                    'css-loader?sourceMap',
-                    'sass-loader?sourceMap',
-                ],
-            },
-            {
                 test: /\.(jpg|png|svg|ico|icns)$/,
                 loader: 'file-loader',
                 options: {
                     name: '[path][name].[ext]',
                 },
+            },
+            {
+                test: /\.(less)$/,
+                use: [
+                    {
+                        loader: 'style-loader'
+                    },
+                    {
+                        loader: 'css-loader'
+                    },
+                    {
+                        loader: 'less-loader',
+                        options: {
+                            javascriptEnabled: true,
+                            modifyVars: {
+                            },
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    {
+                        loader: 'style-loader'
+                    },
+                    {
+                        loader: 'css-loader'
+                    }
+                ],
             },
             {
                 test: /\.(eot|ttf|woff|woff2)$/,
