@@ -1,16 +1,43 @@
 {
-    "extends": [
-      "eslint:recommended",
-      "plugin:@typescript-eslint/recommended"
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended"
+  ],
+  "env": {
+    "node": true,
+    "browser": true
+  },
+  "rules": {
+    "indent": "off",
+    "@typescript-eslint/indent": ["error", 4],
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-var-requires": "error"
+  },
+  "overrides": [
+    {
+      "files": ["webpack.*.js"],
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off"
+      }
+    }
+  ],
+  "parser": "@typescript-eslint/parser",
+  "settings": {
+    "react": {
+      "createClass": "createReactClass",
+      "pragma": "React", 
+      "version": "detect", 
+      "flowVersion": "0.53" 
+    },
+    "propWrapperFunctions": [
+        "forbidExtraProps",
+        {"property": "freeze", "object": "Object"},
+        {"property": "myFavoriteWrapper"}
     ],
-    "env": {
-      "node": true,
-      "browser": true
-    },
-    "rules": {
-      "indent": "off",
-      "@typescript-eslint/indent": ["error", 4],
-      "no-var-requires": "0"
-    },
-    "parser": "@typescript-eslint/parser"
+    "linkComponents": [
+      "Hyperlink",
+      {"name": "Link", "linkAttribute": "to"}
+    ]
   }
+}

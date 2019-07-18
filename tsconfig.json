@@ -2,7 +2,7 @@
     "compilerOptions": { 
         "allowSyntheticDefaultImports": true, 
         "jsx": "react", 
-        "module": "ESNext", 
+        "module": "es2015", 
         "moduleResolution": "node", 
         "noImplicitAny": true, 
         "noImplicitThis": true, 
