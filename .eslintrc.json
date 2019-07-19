@@ -1,43 +1,11 @@
 {
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:react/recommended"
-  ],
-  "env": {
-    "node": true,
-    "browser": true
-  },
-  "rules": {
-    "indent": "off",
-    "@typescript-eslint/indent": ["error", 4],
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/no-var-requires": "error"
-  },
-  "overrides": [
-    {
-      "files": ["webpack.*.js"],
-      "rules": {
-        "@typescript-eslint/no-var-requires": "off"
+  "extends": "erb",
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "configs/webpack.config.eslint.js"
       }
     }
-  ],
-  "parser": "@typescript-eslint/parser",
-  "settings": {
-    "react": {
-      "createClass": "createReactClass",
-      "pragma": "React", 
-      "version": "detect", 
-      "flowVersion": "0.53" 
-    },
-    "propWrapperFunctions": [
-        "forbidExtraProps",
-        {"property": "freeze", "object": "Object"},
-        {"property": "myFavoriteWrapper"}
-    ],
-    "linkComponents": [
-      "Hyperlink",
-      {"name": "Link", "linkAttribute": "to"}
-    ]
   }
 }
+  
