@@ -1,28 +1,11 @@
-// @flow
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Counter.css';
 import routes from '../constants/routes';
 
-type Props = {
-    increment: () => void,
-    incrementIfOdd: () => void,
-    incrementAsync: () => void,
-    decrement: () => void,
-    counter: number
-};
-
-export default class Counter extends Component<Props> {
-    props: Props;
-
+export default class Counter extends Component {
     render() {
-        const {
-            increment,
-            incrementIfOdd,
-            incrementAsync,
-            decrement,
-            counter
-        } = this.props;
+        console.log(this.props);
         return (
             <div>
                 <div className={styles.backButton} data-tid="backButton">
@@ -31,12 +14,12 @@ export default class Counter extends Component<Props> {
                     </Link>
                 </div>
                 <div className={`counter ${styles.counter}`} data-tid="counter">
-                    {counter}
+                    {this.props.counter}
                 </div>
                 <div className={styles.btnGroup}>
                     <button
                         className={styles.btn}
-                        onClick={increment}
+                        onClick={this.props.increment}
                         data-tclass="btn"
                         type="button"
                     >
@@ -44,7 +27,7 @@ export default class Counter extends Component<Props> {
                     </button>
                     <button
                         className={styles.btn}
-                        onClick={decrement}
+                        onClick={this.props.decrement}
                         data-tclass="btn"
                         type="button"
                     >
@@ -52,7 +35,7 @@ export default class Counter extends Component<Props> {
                     </button>
                     <button
                         className={styles.btn}
-                        onClick={incrementIfOdd}
+                        onClick={this.props.incrementIfOdd}
                         data-tclass="btn"
                         type="button"
                     >
@@ -60,7 +43,7 @@ export default class Counter extends Component<Props> {
                     </button>
                     <button
                         className={styles.btn}
-                        onClick={() => incrementAsync()}
+                        onClick={() => this.props.incrementAsync()}
                         data-tclass="btn"
                         type="button"
                     >
