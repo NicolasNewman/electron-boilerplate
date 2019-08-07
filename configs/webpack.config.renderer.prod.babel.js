@@ -70,7 +70,10 @@ export default merge.smart(baseConfig, {
                 test: /\.global\.less$/,
                 use: [
                     {
-                        loader: MiniCssExtractPlugin.loader
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            publicPath: './'
+                        }
                     },
                     {
                         loader: 'css-loader',
@@ -82,7 +85,8 @@ export default merge.smart(baseConfig, {
                     {
                         loader: 'less-loader',
                         options: {
-                            sourceMap: true
+                            sourceMap: true,
+                            javascriptEnabled: true
                         }
                     }
                 ]
@@ -106,7 +110,8 @@ export default merge.smart(baseConfig, {
                     {
                         loader: 'less-loader',
                         options: {
-                            sourceMap: true
+                            sourceMap: true,
+                            strictMath: true
                         }
                     }
                 ]
