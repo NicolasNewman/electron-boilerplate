@@ -1,13 +1,6 @@
 # electron-boilerplate
 
-A boilerplate for Electron containing React, Sass, and ESLint
-
-## Features
-
-* React
-* Sass support
-* TypeScript support
-* Pre-configured ESLint for VSCode
+A boilerplate for Electron containing React, Less, TypeScript, and antd
 
 ## Getting Started
 
