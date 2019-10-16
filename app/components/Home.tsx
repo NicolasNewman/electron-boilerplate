@@ -1,19 +1,23 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { Link } from 'react-router-dom';
-const routes = require('../constants/routes.json');
-const styles = require('./Home.css');
+import { RouteComponentProps } from 'react-router';
+import DataStore from 'app/classes/DataStore';
 
-type Props = {};
+interface IProps extends RouteComponentProps<any> {
+    dataStore: DataStore;
+}
 
-export default class Home extends Component<Props> {
-    props: Props;
+export default class Home extends Component<IProps> {
+    props: IProps;
+
+    constructor(props) {
+        super(props);
+    }
 
     render() {
         return (
-            <div className={styles.container} data-tid="container">
+            <div>
                 <h2>Home</h2>
-                <Link to={routes.COUNTER}>to Counter</Link>
             </div>
         );
     }
