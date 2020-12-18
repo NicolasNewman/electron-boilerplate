@@ -1,5 +1,6 @@
 import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import Home from '../components/Home';
 import CounterActions from '../actions/counter';
 
@@ -13,7 +14,9 @@ function mapDispatchToProps(dispatch: Dispatch) {
     return bindActionCreators(CounterActions, dispatch);
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Home);
+export default withRouter(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(Home)
+);
