@@ -8,6 +8,9 @@
  * When running `yarn build` or `yarn build-main`, this file is compiled to
  * `./app/main.prod.js` using webpack. This gives us some performance wins.
  */
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
+import path from 'path';
 import { app, BrowserWindow, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
@@ -22,7 +25,7 @@ export default class AppUpdater {
     }
 }
 
-let mainWindow = null;
+let mainWindow: BrowserWindow | null = null;
 
 if (process.env.NODE_ENV === 'production') {
     const sourceMapSupport = require('source-map-support');
@@ -41,32 +44,29 @@ const installExtensions = async () => {
     const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
     const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS'];
 
-    return Promise.all(
-        extensions.map(name =>
-            installer.default(installer[name], forceDownload)
+    return installer
+        .default(
+            extensions.map((name) => installer[name]),
+            forceDownload
         )
-    ).catch(console.log);
+        .catch(console.log);
 };
 
-/**
- * Add event listeners...
- */
-
-app.on('window-all-closed', () => {
-    // Respect the OSX convention of having the application in memory even
-    // after all windows have been closed
-    if (process.platform !== 'darwin') {
-        app.quit();
-    }
-});
-
-app.on('ready', async () => {
+const createWindow = async () => {
     if (
         process.env.NODE_ENV === 'development' ||
         process.env.DEBUG_PROD === 'true'
     ) {
         await installExtensions();
     }
+
+    const RESOURCES_PATH = app.isPackaged
+        ? path.join(process.resourcesPath, 'resources')
+        : path.join(__dirname, '../resources');
+
+    const getAssetPath = (...paths: string[]): string => {
+        return path.join(RESOURCES_PATH, ...paths);
+    };
 
     mainWindow = new BrowserWindow({
         show: false,
@@ -75,10 +75,15 @@ app.on('ready', async () => {
         height: sizes.homeWindow.height,
         minWidth: 10,
         minHeight: 10,
-        resizable: false
+        resizable: false,
+        icon: getAssetPath('icon.png'),
+        webPreferences: {
+            nodeIntegration: true,
+            enableRemoteModule: true,
+        },
     });
 
-    mainWindow.loadURL(`file://${__dirname}/app.html`);
+    mainWindow.loadURL(`file://${__dirname}/index.html`);
 
     // @TODO: Use 'ready-to-show' event
     //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event
@@ -101,9 +106,35 @@ app.on('ready', async () => {
     const menuBuilder = new MenuBuilder(mainWindow);
     menuBuilder.buildMenu();
 
+    // Open urls in the user's browser
+    mainWindow.webContents.on('new-window', (event, url) => {
+        event.preventDefault();
+        shell.openExternal(url);
+    });
+
     // Remove this if your app does not use auto updates
     // eslint-disable-next-line
     new AppUpdater();
+};
+
+/**
+ * Add event listeners...
+ */
+
+app.on('window-all-closed', () => {
+    // Respect the OSX convention of having the application in memory even
+    // after all windows have been closed
+    if (process.platform !== 'darwin') {
+        app.quit();
+    }
+});
+
+app.whenReady().then(createWindow).catch(console.log);
+
+app.on('activate', () => {
+    // On macOS it's common to re-create a window in the app when the
+    // dock icon is clicked and there are no other windows open.
+    if (mainWindow === null) createWindow();
 });
 
 ipcMain.on('resize', (e, width: number, height: number) => {
